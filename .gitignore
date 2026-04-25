@@ -1,0 +1,54 @@
+# Build output
+/build/
+/cmake-build-*/
+/out/
+
+# CMake/Ninja generated files
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/compile_commands.json
+/build.ninja
+/.ninja_deps
+/.ninja_log
+
+# Visual Studio generators
+/*.sln
+/*.vcxproj
+/*.vcxproj.filters
+/*.vcxproj.user
+/ALL_BUILD.vcxproj
+/ALL_BUILD.vcxproj.filters
+/ZERO_CHECK.vcxproj
+/ZERO_CHECK.vcxproj.filters
+
+# Binary artifacts
+*.elf
+*.bin
+*.hex
+*.map
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.exe
+
+# Testing / temp
+/Testing/
+/mx.scratch/
+
+# STM32Cube IDE plugin state
+/.settings/*
+!/.settings/
+
+# JetBrains / CLion
+/.idea/workspace.xml
+/.idea/tasks.xml
+/.idea/usage.statistics.xml
+/.idea/shelf/
+/.idea/httpRequests/
+
+# VS Code local caches
+/.vscode/.browse.VC.db*
+
