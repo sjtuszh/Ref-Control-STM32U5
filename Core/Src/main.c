@@ -107,13 +107,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // 翻转 TEST_LED 的引脚电平 (亮变灭，灭变亮)
-    HAL_GPIO_TogglePin(TEST_LED_GPIO_Port, TEST_LED_Pin);
-    HAL_GPIO_TogglePin(TSC_LED1_GPIO_Port, TSC_LED1_Pin);
-    // 延时 500 毫秒 (也就是半秒钟切换一次状态)
-    HAL_Delay(500);
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

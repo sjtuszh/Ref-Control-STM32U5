@@ -67,8 +67,8 @@ void Error_Handler(void);
 #define TCS_C8_GPIO_Port GPIOC
 #define TSC_LED1_Pin GPIO_PIN_9
 #define TSC_LED1_GPIO_Port GPIOA
-#define TSC_LED1A10_Pin GPIO_PIN_10
-#define TSC_LED1A10_GPIO_Port GPIOA
+#define TSC_LED2_Pin GPIO_PIN_10
+#define TSC_LED2_GPIO_Port GPIOA
 #define TCS_C4_Pin GPIO_PIN_10
 #define TCS_C4_GPIO_Port GPIOC
 #define TCS_C5_Pin GPIO_PIN_11

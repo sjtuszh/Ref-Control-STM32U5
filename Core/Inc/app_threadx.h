@@ -68,6 +68,16 @@ extern "C" {
 #define APP_MAIN_THREAD_PRIORITY                   15U
 #define APP_MAIN_THREAD_PREEMPTION_THRESHOLD       APP_MAIN_THREAD_PRIORITY
 #define APP_MAIN_THREAD_TIME_SLICE                 TX_NO_TIME_SLICE
+
+#define APP_OLED_THREAD_STACK_SIZE                 2048U
+#define APP_OLED_THREAD_PRIORITY                   15U
+#define APP_OLED_THREAD_PREEMPTION_THRESHOLD       APP_OLED_THREAD_PRIORITY
+#define APP_OLED_THREAD_TIME_SLICE                 TX_NO_TIME_SLICE
+
+#define APP_LED_THREAD_STACK_SIZE                  1024U
+#define APP_LED_THREAD_PRIORITY                    16U
+#define APP_LED_THREAD_PREEMPTION_THRESHOLD        APP_LED_THREAD_PRIORITY
+#define APP_LED_THREAD_TIME_SLICE                  TX_NO_TIME_SLICE
 /* USER CODE END MTD */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -81,6 +91,8 @@ void MX_ThreadX_Init(void);
 void tx_app_thread_entry(ULONG thread_input);
 
 /* USER CODE BEGIN EFP */
+void tx_oled_thread_entry(ULONG thread_input);
+void tx_led_thread_entry(ULONG thread_input);
 
 /* USER CODE END EFP */
 

@@ -37,11 +37,15 @@ enable_language(C ASM)
 include_directories(
         App/Inc
         App/Src
+        BSP/OLED
+        BSP/OLED/ssd1306_simple
 )
 # 自动搜寻所有 .c 和 .cpp 源代码,然后添加到add_executable(${APP_SOURCES})
 file(GLOB_RECURSE APP_SOURCES
         "App/Inc/*.*"
         "App/Src/*.*"
+        "BSP/OLED/*.*"
+        "BSP/OLED/ssd1306_simple/*.*"
 )
 
 # Create an executable object type

@@ -9,8 +9,10 @@
 extern "C"{
 #endif
 
-// #include "cmsis_os.h"
-    void Main();
+// ####### 应用线程入口函数声明 #######
+// 这些函数由 ThreadX 线程入口调用，用于拆分不同业务职责。
+void OledThreadMain(void);
+void LedThreadMain(void);
 
 
 #ifdef __cplusplus
