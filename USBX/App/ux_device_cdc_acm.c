@@ -43,6 +43,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+static UX_SLAVE_CLASS_CDC_ACM* g_cdc_acm = UX_NULL;
+static volatile UINT g_cdc_acm_ready = 0U;
 
 /* USER CODE END PV */
 
@@ -65,7 +67,8 @@
 VOID USBD_CDC_ACM_Activate(VOID *cdc_acm_instance)
 {
   /* USER CODE BEGIN USBD_CDC_ACM_Activate */
-  UX_PARAMETER_NOT_USED(cdc_acm_instance);
+  g_cdc_acm = (UX_SLAVE_CLASS_CDC_ACM*)cdc_acm_instance;
+  g_cdc_acm_ready = 1U;
   /* USER CODE END USBD_CDC_ACM_Activate */
 
   return;
@@ -81,6 +84,8 @@ VOID USBD_CDC_ACM_Deactivate(VOID *cdc_acm_instance)
 {
   /* USER CODE BEGIN USBD_CDC_ACM_Deactivate */
   UX_PARAMETER_NOT_USED(cdc_acm_instance);
+  g_cdc_acm = UX_NULL;
+  g_cdc_acm_ready = 0U;
   /* USER CODE END USBD_CDC_ACM_Deactivate */
 
   return;
@@ -102,5 +107,35 @@ VOID USBD_CDC_ACM_ParameterChange(VOID *cdc_acm_instance)
 }
 
 /* USER CODE BEGIN 1 */
+
+UINT UsbCdcAcmIsReady(void)
+{
+  return ((g_cdc_acm != UX_NULL) && (g_cdc_acm_ready != 0U)) ? 1U : 0U;
+}
+
+void UsbCdcAcmWrite(const char* text)
+{
+  ULONG actual_length = 0U;
+  ULONG length = 0U;
+  const char* ptr = text;
+
+  if ((g_cdc_acm == UX_NULL) || (text == UX_NULL))
+  {
+    return;
+  }
+
+  while (*ptr != '\0')
+  {
+    ++length;
+    ++ptr;
+  }
+
+  if (length == 0U)
+  {
+    return;
+  }
+
+  (void)ux_device_class_cdc_acm_write(g_cdc_acm, (UCHAR*)text, length, &actual_length);
+}
 
 /* USER CODE END 1 */

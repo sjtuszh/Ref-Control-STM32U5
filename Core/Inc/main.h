@@ -59,12 +59,18 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define TEST_LED_Pin GPIO_PIN_13
 #define TEST_LED_GPIO_Port GPIOC
+#define SW4_Pin GPIO_PIN_0
+#define SW4_GPIO_Port GPIOH
+#define SW3_Pin GPIO_PIN_1
+#define SW3_GPIO_Port GPIOH
 #define TCS_C6_Pin GPIO_PIN_6
 #define TCS_C6_GPIO_Port GPIOC
 #define TCS_C7_Pin GPIO_PIN_7
 #define TCS_C7_GPIO_Port GPIOC
 #define TCS_C8_Pin GPIO_PIN_8
 #define TCS_C8_GPIO_Port GPIOC
+#define SW2_Pin GPIO_PIN_8
+#define SW2_GPIO_Port GPIOA
 #define TSC_LED1_Pin GPIO_PIN_9
 #define TSC_LED1_GPIO_Port GPIOA
 #define TSC_LED2_Pin GPIO_PIN_10

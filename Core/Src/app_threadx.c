@@ -48,6 +48,7 @@ TX_THREAD tx_app_thread;
 TX_THREAD tx_oled_thread;
 TX_THREAD tx_led_thread;
 TX_THREAD tx_sensor_thread;
+TX_THREAD tx_key_thread;
 
 /* USER CODE END PV */
 
@@ -70,6 +71,7 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   CHAR *oled_thread_pointer;
   CHAR *led_thread_pointer;
   CHAR *sensor_thread_pointer;
+  CHAR *key_thread_pointer;
 
   /* USER CODE END App_ThreadX_MEM_POOL */
   CHAR *pointer;
@@ -130,6 +132,20 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   {
     return TX_THREAD_ERROR;
   }
+
+  if (tx_byte_allocate(byte_pool, (VOID**) &key_thread_pointer,
+                       APP_KEY_THREAD_STACK_SIZE, TX_NO_WAIT) != TX_SUCCESS)
+  {
+    return TX_POOL_ERROR;
+  }
+
+  if (tx_thread_create(&tx_key_thread, "key thread", tx_key_thread_entry, 0, key_thread_pointer,
+                       APP_KEY_THREAD_STACK_SIZE, APP_KEY_THREAD_PRIORITY,
+                       APP_KEY_THREAD_PREEMPTION_THRESHOLD, APP_KEY_THREAD_TIME_SLICE,
+                       TX_AUTO_START) != TX_SUCCESS)
+  {
+    return TX_THREAD_ERROR;
+  }
   /* USER CODE END App_ThreadX_Init */
 
   return ret;
@@ -174,6 +190,14 @@ void tx_sensor_thread_entry(ULONG thread_input)
   (void)thread_input;
   SensorThreadMain();
   /* USER CODE END tx_sensor_thread_entry */
+}
+
+void tx_key_thread_entry(ULONG thread_input)
+{
+  /* USER CODE BEGIN tx_key_thread_entry */
+  (void)thread_input;
+  KeyThreadMain();
+  /* USER CODE END tx_key_thread_entry */
 }
 
   /**

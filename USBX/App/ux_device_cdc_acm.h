@@ -55,6 +55,8 @@ VOID USBD_CDC_ACM_Deactivate(VOID *cdc_acm_instance);
 VOID USBD_CDC_ACM_ParameterChange(VOID *cdc_acm_instance);
 
 /* USER CODE BEGIN EFP */
+UINT UsbCdcAcmIsReady(void);
+void UsbCdcAcmWrite(const char* text);
 
 /* USER CODE END EFP */
 

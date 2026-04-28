@@ -83,6 +83,11 @@ extern "C" {
 #define APP_SENSOR_THREAD_PRIORITY                 14U
 #define APP_SENSOR_THREAD_PREEMPTION_THRESHOLD     APP_SENSOR_THREAD_PRIORITY
 #define APP_SENSOR_THREAD_TIME_SLICE               TX_NO_TIME_SLICE
+
+#define APP_KEY_THREAD_STACK_SIZE                  1024U
+#define APP_KEY_THREAD_PRIORITY                    16U
+#define APP_KEY_THREAD_PREEMPTION_THRESHOLD        APP_KEY_THREAD_PRIORITY
+#define APP_KEY_THREAD_TIME_SLICE                  TX_NO_TIME_SLICE
 /* USER CODE END MTD */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -99,6 +104,7 @@ void tx_app_thread_entry(ULONG thread_input);
 void tx_oled_thread_entry(ULONG thread_input);
 void tx_led_thread_entry(ULONG thread_input);
 void tx_sensor_thread_entry(ULONG thread_input);
+void tx_key_thread_entry(ULONG thread_input);
 
 /* USER CODE END EFP */
 

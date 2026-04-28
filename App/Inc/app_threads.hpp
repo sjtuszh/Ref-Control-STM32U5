@@ -8,6 +8,7 @@ extern "C" {
 void OledThreadMain(void);
 void LedThreadMain(void);
 void SensorThreadMain(void);
+void KeyThreadMain(void);
 
 #ifdef __cplusplus
 }
