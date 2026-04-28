@@ -1,6 +1,3 @@
-// ####### 应用线程头文件 #######
-// 这里声明各个业务线程的主函数入口。
-
 #ifndef REF_CONTROL_STM32U5_APP_THREADS_HPP
 #define REF_CONTROL_STM32U5_APP_THREADS_HPP
 
@@ -10,6 +7,7 @@ extern "C" {
 
 void OledThreadMain(void);
 void LedThreadMain(void);
+void SensorThreadMain(void);
 
 #ifdef __cplusplus
 }

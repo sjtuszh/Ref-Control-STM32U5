@@ -23,6 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "app_data.hpp"
 #include "app_threads.hpp"
 /* USER CODE END Includes */
 
@@ -46,6 +47,7 @@ TX_THREAD tx_app_thread;
 /* USER CODE BEGIN PV */
 TX_THREAD tx_oled_thread;
 TX_THREAD tx_led_thread;
+TX_THREAD tx_sensor_thread;
 
 /* USER CODE END PV */
 
@@ -67,6 +69,7 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   /* USER CODE BEGIN App_ThreadX_MEM_POOL */
   CHAR *oled_thread_pointer;
   CHAR *led_thread_pointer;
+  CHAR *sensor_thread_pointer;
 
   /* USER CODE END App_ThreadX_MEM_POOL */
   CHAR *pointer;
@@ -86,6 +89,8 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   }
 
   /* USER CODE BEGIN App_ThreadX_Init */
+  AppDataInit();
+
   if (tx_byte_allocate(byte_pool, (VOID**) &oled_thread_pointer,
                        APP_OLED_THREAD_STACK_SIZE, TX_NO_WAIT) != TX_SUCCESS)
   {
@@ -108,6 +113,20 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   if (tx_thread_create(&tx_led_thread, "led status thread", tx_led_thread_entry, 0, led_thread_pointer,
                        APP_LED_THREAD_STACK_SIZE, APP_LED_THREAD_PRIORITY, APP_LED_THREAD_PREEMPTION_THRESHOLD,
                        APP_LED_THREAD_TIME_SLICE, TX_AUTO_START) != TX_SUCCESS)
+  {
+    return TX_THREAD_ERROR;
+  }
+
+  if (tx_byte_allocate(byte_pool, (VOID**) &sensor_thread_pointer,
+                       APP_SENSOR_THREAD_STACK_SIZE, TX_NO_WAIT) != TX_SUCCESS)
+  {
+    return TX_POOL_ERROR;
+  }
+
+  if (tx_thread_create(&tx_sensor_thread, "sensor thread", tx_sensor_thread_entry, 0, sensor_thread_pointer,
+                       APP_SENSOR_THREAD_STACK_SIZE, APP_SENSOR_THREAD_PRIORITY,
+                       APP_SENSOR_THREAD_PREEMPTION_THRESHOLD, APP_SENSOR_THREAD_TIME_SLICE,
+                       TX_AUTO_START) != TX_SUCCESS)
   {
     return TX_THREAD_ERROR;
   }
@@ -147,6 +166,14 @@ void tx_led_thread_entry(ULONG thread_input)
   (void)thread_input;
   LedThreadMain();
   /* USER CODE END tx_led_thread_entry */
+}
+
+void tx_sensor_thread_entry(ULONG thread_input)
+{
+  /* USER CODE BEGIN tx_sensor_thread_entry */
+  (void)thread_input;
+  SensorThreadMain();
+  /* USER CODE END tx_sensor_thread_entry */
 }
 
   /**
